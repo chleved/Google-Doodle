@@ -13,11 +13,44 @@ A highly-optimized, dynamic Rainmeter skin that automatically fetches and animat
 * **Interactive Tooltips:** Hovering over the doodle displays the official title of the daily event, and clicking it takes you directly to the Google Search results for the doodle!
 
 ## Requirements
-* [Rainmeter](https://www.rainmeter.net/)
-* Python 3.x (with `requests` and `beautifulsoup4` installed)
-* ImageMagick (`magick` added to your system PATH)
+* **[Rainmeter](https://www.rainmeter.net/)**
+* **Python 3.x**
+  * Open your terminal and install the required background scraping engine:
+    ```cmd
+    pip install playwright
+    playwright install chromium
+    ```
+* **ImageMagick**
+  * Install the latest version natively via Winget:
+    ```cmd
+    winget install ImageMagick.ImageMagick
+    ```
+  * *(Alternative for older Windows versions: `scoop install imagemagick`)*
 
 ## Installation
-1. Clone or download this repository into your `Documents\Rainmeter\Skins\` folder.
-2. Open Rainmeter, click "Refresh all", and load the `GoogleDoodle.ini` skin!
-3. To customize the framerate or size, adjust the values in the `[Variables]` section of the `.ini` file!
+1. Open your terminal and navigate to your Rainmeter Skins folder:
+   ```cmd
+   cd %USERPROFILE%\Documents\Rainmeter\Skins\
+   ```
+2. Clone the repository directly into the folder:
+   ```cmd
+   git clone https://github.com/chleved/GoogleDoodle.git
+   ```
+3. Open Rainmeter, click "Refresh all" in the bottom left corner, and load the `GoogleDoodle.ini` skin!
+
+## Customizing the Framerate
+The skin is mathematically optimized to run at a buttery-smooth default of ~60 FPS (using an internal 16ms update tick) to perfectly sync with high-quality doodles. However, you can easily reduce this to save even more performance.
+
+To modify the framerate, open `GoogleDoodle.ini` and locate the two update variables at the very top of the file:
+1. Under `[Rainmeter]`, change `Update=16`
+2. Under `[Variables]`, change `SkinUpdate=16`
+
+**CRITICAL:** Both of these values *must* exactly match for the animation math to correctly track real-world time. If you desynchronize them, the doodle will play in slow-motion!
+
+**Example configurations:**
+* **60 FPS (Default):** Set both to `16` *(Smoothest animation)*
+* **30 FPS:** Set both to `32` *(Balanced)*
+* **15 FPS:** Set both to `64` *(Maximum performance)*
+* **8 FPS:** Set both to `128` *(Ultra power-saving mode)*
+
+No matter what framerate you choose, the widget's internal math will organically skip frames to ensure the 1-second GIF always plays out over exactly 1 second!
