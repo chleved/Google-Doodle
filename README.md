@@ -1,78 +1,23 @@
-# Google Doodle — Rainmeter Skin
+# Rainmeter Google Doodle Widget
 
-Displays **today's Google Doodle** on your desktop, automatically refreshed every hour.  
-Shows the regional doodle for your country (Italy → Italian doodle), just like visiting google.com would.
+A highly-optimized, dynamic Rainmeter skin that automatically fetches and animates the daily Google Doodle directly on your desktop!
 
----
+## Features
 
-## How it works
+* **Automated Daily Fetching:** A lightweight Python script silently runs in the background to scrape the official Google Doodle archive and download today's animated GIF.
+* **Smart Auto-Cropping & Spritesheets:** The script seamlessly converts the GIF into a mathematically precise vertical spritesheet, bypassing Rainmeter's standard GIF limitations.
+* **0% Disk I/O & GPU Acceleration:** Utilizes Rainmeter's native `Bitmap` meter with `BitmapExtend=1` and `Shape` caching. The image is loaded directly into GPU RAM once, meaning absolutely zero disk polling or CPU bottlenecks during animation.
+* **Dynamic Framerate Math:** Automatically calculates the optimal Rainmeter `UpdateDivider` based on the native framerate of the daily GIF. It perfectly limits useless calculation cycles to save battery while preserving flawless frame-sync.
+* **Intelligent Hardware Freeze:** Includes a built-in `UsageMonitor` that tracks your CPU, GPU, and Physical Disk. If your system exceeds 60% load (e.g. launching a game or rendering a video), the animation instantly freezes to yield 100% of your PC's power back to you.
+* **Smart Refresh Delay:** Automatically checks for a new doodle every 3 hours and at exactly midnight. However, if your system is currently under heavy load, the refresh is safely queued and will *only* execute after your PC has dropped below 60% load for 3 uninterrupted seconds.
+* **Interactive Tooltips:** Hovering over the doodle displays the official title of the daily event, and clicking it takes you directly to the Google Search results for the doodle!
 
-Google has an unofficial (but publicly accessible) JSON endpoint:
-
-```
-https://www.google.com/doodles/json/YYYY/MM
-```
-
-No API key needed. Rainmeter's WebParser fetches the JSON, extracts the image URL and title,
-downloads the image, and renders it directly on your desktop.
-
----
+## Requirements
+* [Rainmeter](https://www.rainmeter.net/)
+* Python 3.x (with `requests` and `beautifulsoup4` installed)
+* ImageMagick (`magick` added to your system PATH)
 
 ## Installation
-
-1. Copy the `GoogleDoodle\` folder into:
-   ```
-   %USERPROFILE%\Documents\Rainmeter\Skins\
-   ```
-
-2. Right-click the **Rainmeter tray icon** → Manage → find `GoogleDoodle` → Load `GoogleDoodle.ini`
-
-   Or: right-click tray → Skins → GoogleDoodle → GoogleDoodle.ini
-
-3. Done. The doodle appears on your desktop.
-
----
-
-## Usage
-
-| Action | Effect |
-|---|---|
-| **Click** the doodle image | Opens doodles.google.com in your browser |
-| **Right-click** the skin → Refresh | Force re-fetches the current doodle immediately |
-| Auto-refresh | Every 1 hour (3 600 update cycles × 1 s each) |
-
----
-
-## Customization
-
-Open `GoogleDoodle.ini` in a text editor and edit the `[Variables]` section:
-
-```ini
-[Variables]
-ImgWidth=420        ; Width of the doodle image in pixels (height auto-scales)
-RefreshRate=3600    ; Re-fetch interval in seconds (3600 = 1 hour)
-Font=Segoe UI       ; Font for the title bar
-```
-
-To change skin position: drag it, or use Rainmeter's Manage dialog.
-
----
-
-## Limitations
-
-- **Video / interactive doodles** (e.g. the Halloween game) can't be rendered as a static image.  
-  The skin shows a notice and a click-link instead.
-- If Google has **no special doodle today**, the skin shows the most recent doodle from this month.
-- Some doodles are **region-limited** — you'll see whichever one Google serves to Italy.
-- Google may throttle or block the endpoint in the future (it's unofficial). Right-click → Refresh
-  to test; if it stops working, the `MeasureJSON` debug log will say why.
-
----
-
-## Troubleshooting
-
-1. Right-click the skin → **About (Skin)** to see the log — errors show up here.
-2. If the image doesn't appear on first load, wait ~5 seconds and right-click → Refresh.  
-   The image downloads asynchronously (3-step chain: fetch JSON → parse URL → download image).
-3. If WebParser returns nothing, add `Debug=2` to `[MeasureJSON]` temporarily, refresh the skin,
-   and inspect `WebParserDump.txt` in the skin folder to see what Google returned.
+1. Clone or download this repository into your `Documents\Rainmeter\Skins\` folder.
+2. Open Rainmeter, click "Refresh all", and load the `GoogleDoodle.ini` skin!
+3. To customize the framerate or size, adjust the values in the `[Variables]` section of the `.ini` file!
