@@ -14,8 +14,7 @@ def download_doodle_with_playwright():
         # Using a mobile user-agent sometimes gives a simpler static doodle image instead of complex canvas
         context = browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-            viewport={'width': 1280, 'height': 720},
-            locale="it-IT"
+            viewport={'width': 1280, 'height': 720}
         )
         page = context.new_page()
         
@@ -29,8 +28,8 @@ def download_doodle_with_playwright():
 
         page.on("response", on_response)
         
-        # print("Navigating to https://www.google.it/ ...")
-        page.goto("https://www.google.it/", wait_until="networkidle")
+        # Navigate to the global Google domain, which auto-redirects based on IP
+        page.goto("https://www.google.com/", wait_until="networkidle")
         
         # Give it a few seconds to fully render any JS doodles
         page.wait_for_timeout(3000)
@@ -88,7 +87,7 @@ def download_doodle_with_playwright():
                     if src.startswith('//'):
                         src = 'https:' + src
                     elif src.startswith('/'):
-                        src = 'https://www.google.it' + src
+                        src = 'https://www.google.com' + src
                     
                     # Download it using page.evaluate to fetch
                     js_fetch = f"""
