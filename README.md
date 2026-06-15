@@ -1,6 +1,8 @@
 # Rainmeter Google Doodle Widget
 
-A Rainmeter skin that automatically fetches and animates the daily Google Doodle directly on your desktop!
+![Google Doodle Widget Preview](preview.gif) <!-- TODO: Add a real preview GIF or screenshot here and name it preview.gif -->
+
+The **Google Doodle Rainmeter Widget** is a Rainmeter skin that automatically fetches and animates the daily Google Doodle directly on your desktop!
 
 ## Features
 
@@ -35,7 +37,7 @@ A Rainmeter skin that automatically fetches and animates the daily Google Doodle
    ```
 2. Either download this repository as a `.zip` and extract it here, or clone it via git:
    ```cmd
-   git clone https://github.com/chleved/GoogleDoodle.git
+   git clone https://github.com/chleved/Google-Doodle.git
    ```
    **Important:** Ensure your final folder structure looks exactly like this:
    ```text
