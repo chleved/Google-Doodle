@@ -154,10 +154,12 @@ def process_gif(input_file, output_file):
     import math
     
     width = 250
+    skin_update = 16
     if len(sys.argv) > 1:
         width = int(sys.argv[1])
+    if len(sys.argv) > 2:
+        skin_update = int(sys.argv[2])
         
-    base_update = 16
     speed_multiplier = 1.5
     
     try:
@@ -188,7 +190,7 @@ def process_gif(input_file, output_file):
             delay_cs = 10
             
         delay_ms = (delay_cs * 10) / speed_multiplier
-        divider = max(1, round(delay_ms / base_update))
+        optimal_divider = max(1, round(delay_ms / skin_update))
         
         # Get dimensions
         first_frame = f"{input_file}[0]"
@@ -209,12 +211,12 @@ def process_gif(input_file, output_file):
         if os.path.exists(temp_file):
             os.remove(temp_file)
             
-        sys.stdout.write(f"{frames}|{divider}|{target_h}")
+        sys.stdout.write(f"{frames}|{delay_ms:.2f}|{target_h}|{optimal_divider}")
         sys.stdout.flush()
         
     except Exception as e:
         # Default fallback output if anything fails
-        sys.stdout.write(f"1|6|250")
+        sys.stdout.write(f"1|100|250|1")
         sys.stdout.flush()
 
 if __name__ == "__main__":
