@@ -15,7 +15,8 @@ A highly-optimized, dynamic Rainmeter skin that automatically fetches and animat
 ## Requirements
 * **[Rainmeter](https://www.rainmeter.net/)**
 * **Python 3.x**
-  * Open your terminal and install the required background scraping engine:
+  * To verify your installation, open a terminal and run `python --version` and `pip --version`. If both commands return a version number, you are good to go!
+  * Install the required background scraping engine:
     ```cmd
     pip install playwright
     playwright install chromium
@@ -25,18 +26,26 @@ A highly-optimized, dynamic Rainmeter skin that automatically fetches and animat
     ```cmd
     winget install ImageMagick.ImageMagick
     ```
-  * *(Alternative for older Windows versions: `scoop install imagemagick`)*
+  * *(Scoop also has a slightly older version of ImageMagick if you don't like winget)*
 
 ## Installation
 1. Open your terminal and navigate to your Rainmeter Skins folder:
    ```cmd
    cd %USERPROFILE%\Documents\Rainmeter\Skins\
    ```
-2. Clone the repository directly into the folder:
+2. Either download this repository as a `.zip` and extract it here, or clone it via git:
    ```cmd
    git clone https://github.com/chleved/GoogleDoodle.git
    ```
-3. Open Rainmeter, click "Refresh all" in the bottom left corner, and load the `GoogleDoodle.ini` skin!
+   **Important:** Ensure your final folder structure looks exactly like this:
+   ```text
+   ...\Documents\Rainmeter\Skins\GoogleDoodle\
+   │   GoogleDoodle.ini
+   │   FetchDoodle.py
+   │   README.md
+   ```
+3. **CRITICAL RESTART:** If Rainmeter was running while you installed Python or ImageMagick, you must completely exit Rainmeter (right-click the teardrop icon in your system tray -> Exit) and relaunch it. Otherwise, Rainmeter will not recognize the new commands!
+4. Open Rainmeter, click "Refresh all" in the bottom left corner, and load the `GoogleDoodle.ini` skin!
 
 ## Customizing the Framerate
 The skin is mathematically optimized to run at a buttery-smooth default of ~60 FPS (using an internal 16ms update tick) to perfectly sync with high-quality doodles. However, you can easily reduce this to save even more performance.
@@ -48,9 +57,9 @@ To modify the framerate, open `GoogleDoodle.ini` and locate the two update varia
 **CRITICAL:** Both of these values *must* exactly match for the animation math to correctly track real-world time. If you desynchronize them, the doodle will play in slow-motion!
 
 **Example configurations:**
-* **60 FPS (Default):** Set both to `16` *(Smoothest animation)*
-* **30 FPS:** Set both to `32` *(Balanced)*
-* **15 FPS:** Set both to `64` *(Maximum performance)*
-* **8 FPS:** Set both to `128` *(Ultra power-saving mode)*
+* **60 FPS (Default):** Set both to `16`
+* **30 FPS:** Set both to `32`
+* **15 FPS:** Set both to `64` *(Most doodles are drawn at this framerate)*
+* **8 FPS:** Set both to `128` *
 
 No matter what framerate you choose, the widget's internal math will organically skip frames to ensure the 1-second GIF always plays out over exactly 1 second!

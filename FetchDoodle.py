@@ -201,14 +201,8 @@ def process_gif(input_file, output_file):
         target_w = width
         target_h = round(orig_h * (target_w / orig_w))
         
-        temp_file = output_file + ".miff"
-        
-        # Process image
-        subprocess.run(["magick", input_file, "-coalesce", "-resize", f"{target_w}x{target_h}!", "-background", "none", temp_file], check=True)
-        subprocess.run(["magick", "montage", temp_file, "-tile", "1x", "-geometry", "+0+0", "-background", "none", output_file], check=True)
-        
-        if os.path.exists(temp_file):
-            os.remove(temp_file)
+        # Process image and generate spritesheet in one extremely fast command (no intermediate files)
+        subprocess.run(["magick", input_file, "-coalesce", "-resize", f"{target_w}x{target_h}!", "-background", "none", "-append", output_file], check=True)
             
         sys.stdout.write(f"{frames}|{delay_ms:.2f}|{target_h}|{optimal_divider}")
         sys.stdout.flush()
