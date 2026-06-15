@@ -6,13 +6,13 @@ The **Google Doodle Rainmeter Widget** is a Rainmeter skin that automatically fe
 
 ## Features
 
-* **Automated Daily Fetching:** A lightweight Python script silently runs in the background to scrape the official Google Doodle archive and download today's animated GIF.
-* **Smart Auto-Cropping & Spritesheets:** The script seamlessly converts the GIF into a mathematically precise vertical spritesheet, bypassing Rainmeter's standard GIF limitations.
-* **0% Disk I/O & GPU Acceleration:** Utilizes Rainmeter's native `Bitmap` meter with `BitmapExtend=1` and `Shape` caching. The image is loaded directly into GPU RAM once, meaning absolutely zero disk polling or CPU bottlenecks during animation.
-* **Dynamic Framerate Math:** Automatically calculates the optimal Rainmeter `UpdateDivider` based on the native framerate of the daily GIF. It perfectly limits useless calculation cycles to save battery while preserving flawless frame-sync.
-* **Intelligent Hardware Freeze:** Includes a built-in `UsageMonitor` that tracks your CPU, GPU, and Physical Disk. If your system exceeds 60% load (e.g. launching a game or rendering a video), the animation instantly freezes to yield 100% of your PC's power back to you.
-* **Smart Refresh Delay:** Automatically checks for a new doodle every 3 hours (doodles can change in the middle of the day to alternate versions) and at exactly midnight. However, if your system is currently under heavy load, the refresh is safely queued and will *only* execute after your PC has dropped below 60% load for 3 uninterrupted seconds.
-* **Interactive Tooltips:** Hovering over the doodle displays the official title of the daily event, and clicking it takes you directly to the Google Search results for the doodle!
+* **Automated Daily Fetching:** A lightweight Python script silently runs in the background to scrape the official Google Doodle from the Google homepage and download today's animated GIF based on your region (the region is detected by Google).
+* **Smart Spritesheets:** The script seamlessly converts the GIF into a vertical spritesheet, bypassing Rainmeter's standard GIF limitations.
+* **Optimized Rendering:** Utilizes Rainmeter's native `Bitmap` meter with `BitmapExtend=1`. The image is loaded directly into memory once, ensuring zero disk polling during animation.
+* **Dynamic Framerate Math:** Automatically calculates the optimal Rainmeter `UpdateDivider` based on the native framerate of the daily GIF. It limits unnecessary calculation cycles to save battery while preserving flawless frame-sync.
+* **Intelligent Hardware Freeze:** Includes a built-in `UsageMonitor` that tracks your CPU, GPU, and Disk. If your system exceeds 60% load, the animation instantly freezes to yield power back to your PC.
+* **Smart Refresh Delay:** Automatically checks for a new doodle every 3 hours and at exactly midnight. If your system is under heavy load, the refresh is safely queued until your PC drops below 60% load for 3 uninterrupted seconds.
+* **Interactive Tooltips:** Hovering over the doodle displays the official title of the daily event, and clicking it takes you directly to the Google Search results!
 
 ## Requirements
 * **[Rainmeter](https://www.rainmeter.net/)**
